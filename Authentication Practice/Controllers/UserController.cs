@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Authentication_Practice.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Authentication_Practice.Controllers
 {
@@ -29,9 +30,14 @@ namespace Authentication_Practice.Controllers
 
         public ActionResult Info()
         {
-            var currentUser = User;
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
             var model = new InfoVM()
-            {};
+            {
+                DOB = currentUser.DateOfBirth,
+                Email = currentUser.Email,
+                FirstName = currentUser.FirstName,
+                LastName = currentUser.LastName
+            };
             return View(model);
         }
     }
