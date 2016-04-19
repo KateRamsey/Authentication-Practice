@@ -18,7 +18,7 @@ namespace Authentication_Practice.Controllers
             
             var model = db.Users.ToList().Select(l => new InfoVM()
             {
-                DOB = l.DateOfBirth,
+                DOB = l.DateOfBirth.ToShortDateString(),
                 Email = l.Email,
                 FirstName = l.FirstName,
                 LastName = l.LastName
@@ -33,7 +33,7 @@ namespace Authentication_Practice.Controllers
             var currentUser = db.Users.Find(User.Identity.GetUserId());
             var model = new InfoVM()
             {
-                DOB = currentUser.DateOfBirth,
+                DOB = currentUser.DateOfBirth.ToShortDateString(),
                 Email = currentUser.Email,
                 FirstName = currentUser.FirstName,
                 LastName = currentUser.LastName
